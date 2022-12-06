@@ -1,4 +1,4 @@
-from app.config import Settings
+from app.config import config
 from fastapi import FastAPI  # , HTTPException
 # from starlette.responses import Response
 import uvicorn
@@ -20,9 +20,9 @@ def start():
     Launched with 'poetry run start' at root level
     """
     uvicorn.run(
-        app=Settings.app,
-        host=Settings.host,
-        port=Settings.port,
-        reload=Settings.reload,
-        workers=1,
+        app=config.APP,
+        host=config.HOST,
+        port=config.PORT,
+        reload=config.RELOAD,
+        workers=config.WORKERS,
     )
