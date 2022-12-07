@@ -12,6 +12,7 @@
 #     reload = bool(os.environ['RELOAD'])
 #     workers = int(os.environ['WORKERS'])
 
+from functools import lru_cache
 from pydantic import BaseSettings, Field, BaseModel
 
 
@@ -83,4 +84,7 @@ class FactoryConfig:
             raise ValueError('ENVIRON must be only "dev" or "prod"')
 
 
-config = FactoryConfig(GlobalConfig().ENVIRON)()
+@lru_cache
+def get_config() -> DevConfig | ProdConfig:
+    settings = FactoryConfig(GlobalConfig().ENVIRON)()
+    return settings

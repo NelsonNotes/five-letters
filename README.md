@@ -8,7 +8,7 @@ poetry install
 
 ## migrations
 
-### new:
+### new (autogenerate by changing /app/db/entities/tables.py):
 
 ```bash
 poetry run alembic revision --autogenerate -m 'add users table'

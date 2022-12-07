@@ -1,10 +1,11 @@
-from app.config import config
+from app.config import get_config
 from fastapi import FastAPI  # , HTTPException
 # from starlette.responses import Response
 import uvicorn
 
 
 app = FastAPI()
+config = get_config()
 
 
 @app.get("/")
