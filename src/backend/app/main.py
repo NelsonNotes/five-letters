@@ -1,6 +1,7 @@
 from app.config import get_config
-from fastapi import FastAPI  # , HTTPException
-# from starlette.responses import Response
+from fastapi import FastAPI
+from app.api.api_v1.api import api_router
+
 import uvicorn
 
 
@@ -8,12 +9,7 @@ app = FastAPI()
 config = get_config()
 
 
-@app.get("/")
-def root():
-    """
-    Hello World root path
-    """
-    return {"message": "Fast API in Python"}
+app.include_router(api_router, prefix=config.API_PREFIX)
 
 
 def start():
