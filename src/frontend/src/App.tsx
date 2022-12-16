@@ -21,37 +21,10 @@ export const App = () => {
 	const session = useSelector(selectSession)
 
 	useEffect(() => {
-		if (count === 1) {
-			console.log('NELSON session', session)
-		}
-		if (count === 2) {
-			dispatch(
-				fetchSession({
-					grant_type: 'password',
-					username: 'nikitazharov2',
-					password: 'NikitaNelson2002',
-				})
-			)
-		}
-		if (count === 3) {
-			dispatch(fetchUser())
-		}
-		if (count === 4) {
-			dispatch(makeAttempt({ attempt: 'попыт' }))
-		}
+		if (count === 100) alert('Прям настолько скучно?')
+		if (count === 500) alert('Не ну реально, я думаю, уже достаточно')
+		if (count === 1000) alert('Уже не смешно...')
 	}, [count])
-
-	useEffect(() => {
-		console.log('NELSON user', user)
-	}, [user])
-
-	useEffect(() => {
-		console.log('NELSON attempt', attempt)
-	}, [attempt])
-
-	useEffect(() => {
-		console.log('NELSON session', session)
-	}, [session])
 
 	return (
 		<div className='App'>
