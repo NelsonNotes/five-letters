@@ -22,12 +22,21 @@ export const App = () => {
 
 	useEffect(() => {
 		if (count === 1) {
-			dispatch(fetchUser())
+			console.log('NELSON session', session)
 		}
 		if (count === 2) {
-			dispatch(fetchSession())
+			dispatch(
+				fetchSession({
+					grant_type: 'password',
+					username: 'nikitazharov2',
+					password: 'NikitaNelson2002',
+				})
+			)
 		}
 		if (count === 3) {
+			dispatch(fetchUser())
+		}
+		if (count === 4) {
 			dispatch(makeAttempt({ attempt: 'попыт' }))
 		}
 	}, [count])

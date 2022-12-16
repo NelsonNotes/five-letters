@@ -8,6 +8,7 @@ export interface TSessionResponse {
 export interface TSessionInput {
 	username: string
 	password: string
+	grant_type: string
 }
 
 export type TSessionState = TState<TSessionResponse, any>

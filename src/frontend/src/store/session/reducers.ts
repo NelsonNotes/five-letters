@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { TSessionState } from '../../types/session'
 import { fetchSession } from './actions'
+import { sessionPull } from './utils'
 
 const initialState: TSessionState = {
 	loading: false,
-	data: null,
+	data: sessionPull(),
 	error: null,
 }
 
