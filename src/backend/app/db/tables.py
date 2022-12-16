@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy import func
 from sqlalchemy import ForeignKey
 
@@ -18,11 +18,10 @@ class User(Base, IDMixin, DateTimeMixin):
     email = Column(String, nullable=False)
     avatar_url = Column(String)
     hash_password = Column(String, nullable=False)
-    progress = Column(Integer, nullable=False)
+    current_word_id = Column(Integer, ForeignKey(
+        "word.id"), server_default='1')
     attempts = relationship("Attempt", back_populates="user")
-
-    class Config:
-        orm_mode: True
+    is_admin = Column(Boolean, nullable=False, server_default='false')
 
 
 class Word(Base, IDMixin, DateTimeMixin):
@@ -30,18 +29,12 @@ class Word(Base, IDMixin, DateTimeMixin):
 
     word = Column(String, nullable=False)
 
-    class Config:
-        orm_mode: True
-
 
 class Attempt(Base, IDMixin, DateTimeMixin):
     __tablename__ = "attempt"
 
-    userId = Column(Integer, ForeignKey("user.id"))
+    user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship("User", back_populates="attempts")
-    wordId = Column(Integer, ForeignKey("word.id"))
+    word_id = Column(Integer, ForeignKey("word.id"))
     word = relationship("Word")
     attempt = Column(String, nullable=False)
-
-    class Config:
-        orm_mode: True

@@ -23,4 +23,4 @@ class WordModel(WordBase, DateTimeSchemaMixin, IDSchemaMixin):
     word: str
 
     class Config:
-        orm_mode: True
+        orm_mode = True

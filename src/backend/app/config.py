@@ -34,7 +34,6 @@ class GlobalConfig(BaseSettings):
 
     # environment specific variables do not need the Field class
     APP: str = "app.main:app"
-    API_PREFIX: str = "/api/v1"
     ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 8
     SECRET_KEY: str = secrets.token_urlsafe(32)
     ALGORITHM = "HS256"

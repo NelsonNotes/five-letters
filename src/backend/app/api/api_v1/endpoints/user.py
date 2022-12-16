@@ -1,12 +1,11 @@
 from typing import Any, List
+from app.db.tables import User
 from fastapi import APIRouter, Body, Depends, HTTPException
-from fastapi.encoders import jsonable_encoder
-from pydantic.networks import EmailStr
 from sqlalchemy.orm import Session
 
 
 from app.schemas.user import UserCreate, UserUpdate, UserModel
-from app.db.entities.repository.user import userRepository
+from app.services.user import userService
 from app.api import deps
 from app.config import get_config
 
@@ -24,34 +23,25 @@ def create_user(
     """
     Create new user.
     """
-    user = userRepository.get_by_email(db, email=user_in.email)
+    user = userService.get_by_email(db, email=user_in.email)
     if user:
         raise HTTPException(
             status_code=400,
             detail="The user with this username already exists in the system.",
         )
-    user = userRepository.create(db, obj_in=user_in)
+    user = userService.create(db, obj_in=user_in)
     return user
 
 
 @router.get("/", response_model=UserModel)
-def get_users(
+def get_user_with_attempts(
     *,
     db: Session = Depends(deps.get_db),
-    current_user: UserModel = Depends(deps.get_current_user),
-) -> List[UserModel]:
+    current_user: User = Depends(deps.get_current_user),
+) -> Any:
     """
-    Get all users.
+    Create new user.
     """
-    users = userRepository.get_multi(db)
-    if not len(users):
-        raise HTTPException(
-            status_code=404,
-            detail="No one users found.",
-        )
-    return users
-
-
-@router.get("/no-auth")
-def open_route(current_user=Depends(deps.get_current_user)):
-    return {"detail": "Yeeeeah man dat's open route"}
+    user: UserModel = userService.get_with_client_attempts(
+        db=db, user_id=current_user.id)
+    return user

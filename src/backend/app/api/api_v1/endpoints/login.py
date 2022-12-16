@@ -11,7 +11,7 @@ from app.config import get_config
 from app.schemas.token import Token
 from app.schemas.user import UserModel
 from app.db.tables import User
-from app.db.entities.repository.user import userRepository
+from app.services.user import userService
 
 router = APIRouter()
 settings = get_config()
@@ -24,7 +24,7 @@ def login_access_token(
     """
     OAuth2 compatible token login, get an access token for future requests
     """
-    user = userRepository.authenticate(
+    user = userService.authenticate(
         db, email=form_data.username, password=form_data.password
     )
     if not user:
@@ -41,7 +41,7 @@ def login_access_token(
 
 
 @router.post("/test-token", response_model=UserModel)
-def test_token(current_user: User = Depends(deps.get_current_user)) -> Any:
+def test_token(current_user: UserModel = Depends(deps.get_current_user)) -> Any:
     """
     Test access token
     """
