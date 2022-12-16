@@ -18,7 +18,7 @@ def create_user(
     *,
     db: Session = Depends(deps.get_db),
     user_in: UserCreate,
-    current_user: UserModel = Depends(deps.get_current_user),
+    current_user: UserModel = Depends(deps.get_current_superuser),
 ) -> Any:
     """
     Create new user.

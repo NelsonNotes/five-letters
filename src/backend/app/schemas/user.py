@@ -43,3 +43,18 @@ class UserModel(BaseModel, DateTimeSchemaMixin, IDSchemaMixin):
 
     class Config:
         orm_mode = True
+
+
+class UserRawAttemptsModel(BaseModel, DateTimeSchemaMixin, IDSchemaMixin):
+    first_name: str
+    last_name: str
+    email: str
+    avatar_url:  Optional[str] = None
+    current_word_id:  int
+    attempts: List[AttemptModel]
+
+    class Config:
+        orm_mode = True
+
+    class Config:
+        orm_mode = True

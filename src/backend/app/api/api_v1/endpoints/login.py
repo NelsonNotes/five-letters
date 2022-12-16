@@ -9,7 +9,7 @@ from app.api import deps
 from app.core import security
 from app.config import get_config
 from app.schemas.token import Token
-from app.schemas.user import UserModel
+from app.schemas.user import UserRawAttemptsModel
 from app.db.tables import User
 from app.services.user import userService
 
@@ -40,8 +40,8 @@ def login_access_token(
     }
 
 
-@router.post("/test-token", response_model=UserModel)
-def test_token(current_user: UserModel = Depends(deps.get_current_user)) -> Any:
+@router.post("/test-token", response_model=UserRawAttemptsModel)
+def test_token(current_user: User = Depends(deps.get_current_user)) -> Any:
     """
     Test access token
     """
