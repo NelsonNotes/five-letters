@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { TUserState } from '../../types/user'
-import { fetchUser } from './actions'
+import { fetch } from './actions'
 
 const initialState: TUserState = {
 	loading: false,
@@ -15,15 +15,15 @@ export const userSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchUser.pending, (state) => {
+			.addCase(fetch.pending, (state) => {
 				state.loading = true
 			})
-			.addCase(fetchUser.fulfilled, (state, action) => {
+			.addCase(fetch.fulfilled, (state, action) => {
 				state.loading = false
 				state.data = action.payload
 				state.error = null
 			})
-			.addCase(fetchUser.rejected, (state, action) => {
+			.addCase(fetch.rejected, (state, action) => {
 				state.loading = false
 				state.data = null
 				state.error = action.error

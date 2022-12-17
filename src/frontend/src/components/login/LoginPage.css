@@ -1,0 +1,47 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+}
+
+.logo {
+	height: 10em;
+	padding: 1.5em;
+	will-change: filter;
+	animation: logo-float infinite 3s;
+}
+
+h2 {
+	color: var(--secondary-text-color);
+}
+
+input {
+	margin: 0 0 30px 0;
+}
+
+p {
+	color: var(--primary-text-color);
+}
+
+@keyframes logo-float {
+	0% {
+		transform: translatey(0px);
+		transition: ease 3s;
+	}
+	50% {
+		transform: translatey(-30px);
+	}
+	100% {
+		transform: translatey(0px);
+		transition: ease 3s;
+	}
+}
+
+.card {
+	padding: 2em;
+}
+
+.read-the-docs {
+	color: #888;
+}

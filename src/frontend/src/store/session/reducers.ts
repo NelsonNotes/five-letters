@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { TSessionState } from '../../types/session'
-import { fetchSession } from './actions'
+import { fetch } from './actions'
 import { sessionPull } from './utils'
 
 const initialState: TSessionState = {
@@ -13,23 +13,31 @@ const initialState: TSessionState = {
 export const sessionSlice = createSlice({
 	name: 'session',
 	initialState,
-	reducers: {},
+	reducers: {
+		clear: (state) => {
+			state.loading = false
+			state.data = null
+			state.error = null
+		},
+	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchSession.pending, (state) => {
+			.addCase(fetch.pending, (state) => {
 				state.loading = true
 			})
-			.addCase(fetchSession.fulfilled, (state, action) => {
+			.addCase(fetch.fulfilled, (state, action) => {
 				state.loading = false
 				state.data = action.payload
 				state.error = null
 			})
-			.addCase(fetchSession.rejected, (state, action) => {
+			.addCase(fetch.rejected, (state, action) => {
 				state.loading = false
 				state.data = null
 				state.error = action.error
 			})
 	},
 })
+
+export const { clear } = sessionSlice.actions
 
 export default sessionSlice.reducer

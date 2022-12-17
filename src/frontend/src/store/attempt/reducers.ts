@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { TAttemptState } from '../../types/attempt'
 
-import { makeAttempt } from './actions'
+import { make } from './actions'
 
 const initialState: TAttemptState = {
 	loading: false,
@@ -15,15 +15,15 @@ export const attemptSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(makeAttempt.pending, (state) => {
+			.addCase(make.pending, (state) => {
 				state.loading = true
 			})
-			.addCase(makeAttempt.fulfilled, (state, action) => {
+			.addCase(make.fulfilled, (state, action) => {
 				state.loading = false
 				state.data = action.payload
 				state.error = null
 			})
-			.addCase(makeAttempt.rejected, (state, action) => {
+			.addCase(make.rejected, (state, action) => {
 				state.loading = false
 				state.data = null
 				state.error = action.error
