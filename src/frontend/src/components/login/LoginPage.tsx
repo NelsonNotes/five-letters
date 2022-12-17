@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import './LoginPage.css'
+import './Login.css'
 import GameLogo from '../../assets/logo.svg'
 
 import { sessionOperations } from '../../store/session/operations'

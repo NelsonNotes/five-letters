@@ -9,7 +9,7 @@ export interface TAttemptResponse {
 	letters_status: number[]
 }
 
-export enum TAttemptLetterStatus {
+export enum AttemptLetterStatus {
 	Incorrect = 0,
 	Included = 1,
 	Correct = 2,

@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 
 import gameLogo from './assets/logo.svg'
-import './LoadingPage.css'
+import './Loading.css'
 
 export const LoadingPage: React.FC = () => {
 	const [count, setCount] = useState(0)
