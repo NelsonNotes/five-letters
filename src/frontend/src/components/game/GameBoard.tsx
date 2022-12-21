@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import './Game.css'
 
 import { useAppDispatch } from '../../hooks/app'
-import { userOperations } from '../../store/user/operations'
 import { TAttemptResponse } from '../../types/attempt'
 import { AttemptLetterStatus } from '../../types/attempt'
 
@@ -28,16 +27,18 @@ export const GameBoard: React.FC<Props> = (props: Props) => {
 
 	return (
 		<div>
-			{userAttempts.map((attempt) => {
+			{userAttempts.map((attempt, idx) => {
 				const attemptByLetters = attempt.attempt.split('')
 
 				return (
 					<div
+						key={idx}
 						style={{ display: 'flex', flexFlow: 'row', marginBottom: '60px' }}
 					>
 						{attemptByLetters.map((letter, idx) => {
 							return (
 								<div
+									key={idx}
 									style={{
 										fontSize: '72px',
 										color: getColorByStatus(attempt.letters_status[idx]),

@@ -32,7 +32,7 @@ export const sessionSlice = createSlice({
 			})
 			.addCase(fetch.rejected, (state, action) => {
 				state.loading = false
-				state.data = null
+				state.data = state.data
 				state.error = action.error
 			})
 	},

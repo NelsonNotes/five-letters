@@ -24,6 +24,9 @@ def make_attempt(
     """
     Make an attempt.
     """
+    if len(attempt_in.attempt) != 5:
+        raise HTTPException(
+            status_code=400, detail="Word length must be 5 letters")
     obj_in = AttemptCreate(
         user_id=current_user.id, word_id=current_user.current_word_id, attempt=attempt_in.attempt)
     attempt = attemptService.create(db=db, obj_in=obj_in)

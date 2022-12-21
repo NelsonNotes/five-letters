@@ -4,6 +4,8 @@ from typing import List
 def check_word(
     attempt: str, word: str
 ) -> List[int]:
+    if len(attempt) != 5:
+        return [0, 0, 0, 0, 0]
     attempt_lower: str = attempt.lower()
     word_lower: str = word.lower()
     result: List[int] = [0, 0, 0, 0, 0]

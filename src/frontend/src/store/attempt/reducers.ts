@@ -25,7 +25,7 @@ export const attemptSlice = createSlice({
 			})
 			.addCase(make.rejected, (state, action) => {
 				state.loading = false
-				state.data = null
+				state.data = state.data
 				state.error = action.error
 			})
 	},

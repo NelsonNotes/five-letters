@@ -25,7 +25,7 @@ export async function customFetch<R = any, B = any>(
 
 	if (method === 'GET') {
 		const result = await fetch(globalConsts.API_URL + uri, {
-			credentials: 'include',
+			// credentials: 'include',
 			method,
 			headers: headers,
 		})
@@ -46,11 +46,17 @@ export async function customFetch<R = any, B = any>(
 	}
 
 	const result = await fetch(globalConsts.API_URL + uri, {
-		credentials: 'include',
+		// credentials: 'include',
 		method,
 		body: asFormData && formData ? formData : JSON.stringify(body),
 		headers,
 	})
+
+	if (!result.ok) {
+		return result.text().then((text) => {
+			throw new Error(text)
+		})
+	}
 
 	return result.json()
 }
